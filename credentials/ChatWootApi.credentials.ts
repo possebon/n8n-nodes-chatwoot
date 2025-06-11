@@ -41,7 +41,7 @@ export class ChatWootApi implements ICredentialType {
         type: 'generic',
         properties: {
             headers: {
-                'api_access_token': '={{$credentials.accessToken}}',
+                'Api-Access-Token': '={{$credentials.accessToken}}',
             },
         },
     };
