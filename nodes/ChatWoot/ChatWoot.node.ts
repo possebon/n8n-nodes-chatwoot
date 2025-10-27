@@ -1,10 +1,27 @@
-import {INodeType, INodeTypeDescription} from 'n8n-workflow';
+import {INodeType, INodeTypeDescription, INodeProperties} from 'n8n-workflow';
 import {N8NPropertiesBuilder, N8NPropertiesBuilderConfig} from '@devlikeapro/n8n-openapi-node';
 import * as doc from './openapi.json';
 
 const config: N8NPropertiesBuilderConfig = {}
 const parser = new N8NPropertiesBuilder(doc, config);
-const properties = parser.build()
+const generatedProperties = parser.build();
+
+// Add a global Account ID field at the beginning that shows for all operations
+const accountIdField: INodeProperties = {
+    displayName: 'Account ID',
+    name: 'accountId',
+    type: 'string',
+    default: '',
+    required: true,
+    description: 'The Chatwoot account ID (required for multi-tenant setups)',
+    placeholder: '1',
+};
+
+// Remove the auto-generated account_id fields and add our global one
+const properties = [
+    accountIdField,
+    ...generatedProperties.filter(p => p.name !== 'account_id')
+]
 
 export class ChatWoot implements INodeType {
     description: INodeTypeDescription = {
@@ -31,7 +48,7 @@ export class ChatWoot implements INodeType {
                 Accept: 'application/json',
                 'Content-Type': 'application/json',
             },
-            baseURL: '={{$credentials.url}}',
+            baseURL: '={{$credentials.url}}/api/v1/accounts/{{$parameter["accountId"]}}',
         },
         properties: properties,
     };

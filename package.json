@@ -1,6 +1,6 @@
 {
-  "name": "@devlikeapro/n8n-nodes-chatwoot",
-  "version": "1.0.3",
+  "name": "@fpossebon/n8n-nodes-chatwoot",
+  "version": "1.0.4",
   "description": "n8n node to connect with ChatWoot",
   "keywords": [
     "n8n-community-node-package"
@@ -8,12 +8,12 @@
   "license": "MIT",
   "homepage": "",
   "author": {
-    "name": "Devlikapro",
-    "email": "admin@devlike.pro"
+    "name": "Fernando Possebon",
+    "email": "possebon@gmail.com"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/devlikeapro/n8n-nodes-chatwoot.git"
+    "url": "https://github.com/fpossebon/n8n-nodes-chatwoot.git"
   },
   "engines": {
     "node": ">=18.10",
